@@ -20,9 +20,7 @@ export function Footer() {
           <h4 className="text-white font-sans tracking-[0.2em] font-medium uppercase mb-6 text-[10px]">Explore</h4>
           <ul className="space-y-4 text-gray-400 font-sans font-light text-sm">
             <li><Link to="/collections" className="hover:text-[#C5A059] transition-colors">Latest Collections</Link></li>
-            <li><Link to="/about" className="hover:text-[#C5A059] transition-colors">Our Story</Link></li>
             <li><Link to="/contact" className="hover:text-[#C5A059] transition-colors">Contact Us</Link></li>
-            <li><Link to="/opaline-admin-hidden" className="hover:text-[#C5A059] transition-colors">Admin Portal</Link></li>
           </ul>
         </div>
 
