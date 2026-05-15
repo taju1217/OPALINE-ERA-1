@@ -19,10 +19,12 @@ import { AdminOrders } from '@/pages/admin/AdminOrders';
 import { CursorGlow } from '@/components/ui/CursorGlow';
 import { ScrollToTop } from '@/components/ui/ScrollToTop';
 import { Loader } from '@/components/ui/Loader';
+import { FirebaseSync } from '@/FirebaseSync';
 
 export default function App() {
   return (
     <>
+      <FirebaseSync />
       <Loader />
       <CursorGlow />
       <BrowserRouter>
