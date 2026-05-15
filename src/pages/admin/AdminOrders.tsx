@@ -139,6 +139,9 @@ export function AdminOrders() {
                     <p className="text-white">{selectedOrder.customerName}</p>
                     <p className="text-sm text-gray-400">{selectedOrder.customerPhone}</p>
                     <p className="text-sm text-gray-400">{selectedOrder.customerAddress}</p>
+                    {selectedOrder.deliveryLocation && (
+                      <p className="text-sm text-[#C5A059] mt-1">{selectedOrder.deliveryLocation} (Delivery: ৳{selectedOrder.deliveryCharge})</p>
+                    )}
                   </div>
                   <div className="text-right">
                     <p className="text-xs text-gray-500 uppercase tracking-widest mb-1">Status</p>

@@ -83,7 +83,10 @@ export function ProductDetails() {
           transition={{ duration: 0.8, delay: 0.2 }}
           className="flex flex-col justify-center"
         >
-          <p className="text-[#C5A059] uppercase tracking-[0.4em] text-[10px] font-semibold mb-4">{product.category}</p>
+          <div className="flex items-center gap-3 mb-4">
+            <p className="text-[#C5A059] uppercase tracking-[0.4em] text-[10px] font-semibold">{product.category}</p>
+            {product.isPreOrder && <span className="bg-[#C5A059]/20 text-[#C5A059] px-2 py-0.5 rounded text-[9px] uppercase tracking-widest font-medium border border-[#C5A059]/30">Pre-order Item</span>}
+          </div>
           <h1 className="text-4xl lg:text-5xl font-serif font-light leading-[1.1] mb-6 italic tracking-tight">{product.title}</h1>
           
           <div className="flex items-center gap-2 mb-8">
@@ -110,7 +113,7 @@ export function ProductDetails() {
             }`}
           >
             <ShoppingBag size={18} />
-            {isAdded ? 'Added to Cart' : 'Add to Cart'}
+            {isAdded ? 'Added to Cart' : (product.isPreOrder ? 'Pre-order Now' : 'Add to Cart')}
           </button>
           
           <div className="mt-12 pt-8 border-t border-white/10">

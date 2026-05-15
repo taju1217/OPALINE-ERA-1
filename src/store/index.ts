@@ -12,6 +12,7 @@ export interface Product {
   image: string;
   gallery?: string[];
   description: string;
+  isPreOrder?: boolean;
 }
 
 export interface CartItem extends Product {
@@ -27,6 +28,8 @@ export interface Order {
   items: CartItem[];
   status: 'Pending' | 'Shipped' | 'Delivered' | 'Cancelled';
   date: string;
+  deliveryLocation?: string;
+  deliveryCharge?: number;
 }
 
 interface AppState {

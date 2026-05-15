@@ -67,7 +67,10 @@ export function Products() {
             </div>
             
             <div className="text-center">
-              <p className="text-[#C5A059] text-[9px] uppercase tracking-[0.3em] font-medium mb-2">{product.category}</p>
+              <div className="flex justify-center items-center gap-2 mb-2">
+                <p className="text-[#C5A059] text-[9px] uppercase tracking-[0.3em] font-medium">{product.category}</p>
+                {product.isPreOrder && <span className="bg-[#C5A059]/20 text-[#C5A059] px-2 py-0.5 rounded text-[8px] uppercase">Pre-order</span>}
+              </div>
               <Link to={`/product/${product.id}`}>
                 <h3 className="text-xl font-serif font-light italic mb-1 hover:text-[#C5A059] transition-colors">{product.title}</h3>
               </Link>

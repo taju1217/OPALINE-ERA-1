@@ -20,12 +20,13 @@ export function AdminProducts() {
     rating: '5',
     image: '',
     gallery: '',
-    description: ''
+    description: '',
+    isPreOrder: false
   });
 
   const openAdd = () => {
     setEditingId(null);
-    setNewProduct({ title: '', price: '', category: '', rating: '5', image: '', gallery: '', description: '' });
+    setNewProduct({ title: '', price: '', category: '', rating: '5', image: '', gallery: '', description: '', isPreOrder: false });
     setIsAdding(true);
   };
 
@@ -38,7 +39,8 @@ export function AdminProducts() {
       rating: product.rating.toString(),
       image: product.image,
       gallery: product.gallery?.join('\n') || '',
-      description: product.description
+      description: product.description,
+      isPreOrder: !!product.isPreOrder
     });
     setIsAdding(true);
   };
@@ -55,7 +57,8 @@ export function AdminProducts() {
           rating: parseFloat(newProduct.rating),
           image: newProduct.image || 'https://images.unsplash.com/photo-1599643478514-4a520239b940?auto=format&fit=crop&q=80&w=800',
           gallery: galleryArray,
-          description: newProduct.description
+          description: newProduct.description,
+          isPreOrder: newProduct.isPreOrder
         });
       } else {
         addProduct({
@@ -66,12 +69,13 @@ export function AdminProducts() {
           rating: parseFloat(newProduct.rating),
           image: newProduct.image || 'https://images.unsplash.com/photo-1599643478514-4a520239b940?auto=format&fit=crop&q=80&w=800',
           gallery: galleryArray,
-          description: newProduct.description
+          description: newProduct.description,
+          isPreOrder: newProduct.isPreOrder
         });
       }
       setIsAdding(false);
       setEditingId(null);
-      setNewProduct({ title: '', price: '', category: '', rating: '5', image: '', gallery: '', description: '' });
+      setNewProduct({ title: '', price: '', category: '', rating: '5', image: '', gallery: '', description: '', isPreOrder: false });
     }
   };
 
@@ -108,7 +112,10 @@ export function AdminProducts() {
                   <td className="px-6 py-4">
                     <img src={product.image} className="w-12 h-12 object-cover bg-black border border-white/10" alt={product.title} />
                   </td>
-                  <td className="px-6 py-4 font-medium text-white">{product.title}</td>
+                  <td className="px-6 py-4 font-medium text-white">
+                    {product.title}
+                    {product.isPreOrder && <span className="ml-2 bg-[#C5A059]/20 text-[#C5A059] px-2 py-0.5 rounded text-[8px] uppercase">Pre-order</span>}
+                  </td>
                   <td className="px-6 py-4">{product.category}</td>
                   <td className="px-6 py-4">৳{product.price.toLocaleString()}</td>
                   <td className="px-6 py-4">
@@ -172,6 +179,10 @@ export function AdminProducts() {
                 <div className="space-y-2">
                   <label className="text-[10px] uppercase tracking-[0.2em] text-[#C5A059] font-medium">Description</label>
                   <textarea rows={3} value={newProduct.description} onChange={e => setNewProduct({...newProduct, description: e.target.value})} className="w-full bg-white/5 border border-white/10 px-4 py-3 text-white outline-none focus:border-[#C5A059] transition-colors resize-none"></textarea>
+                </div>
+                <div className="flex items-center gap-3 mt-4">
+                  <input type="checkbox" id="isPreOrder" checked={newProduct.isPreOrder} onChange={e => setNewProduct({...newProduct, isPreOrder: e.target.checked})} className="w-4 h-4 accent-[#C5A059] cursor-pointer" />
+                  <label htmlFor="isPreOrder" className="text-[10px] uppercase tracking-[0.2em] text-white font-medium cursor-pointer">Available for Pre-Order</label>
                 </div>
                 <button type="submit" className="w-full mt-6 py-4 bg-[#C5A059] hover:bg-[#D4B475] text-black transition-all duration-300 uppercase tracking-[0.2em] text-[11px] font-bold">
                   Save Product

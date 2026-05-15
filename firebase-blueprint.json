@@ -10,7 +10,8 @@
         "category": { "type": "string" },
         "rating": { "type": "number" },
         "image": { "type": "string" },
-        "description": { "type": "string" }
+        "description": { "type": "string" },
+        "isPreOrder": { "type": "boolean" }
       },
       "required": ["title", "price", "category", "rating", "image", "description"]
     },
@@ -24,7 +25,9 @@
         "customerAddress": { "type": "string" },
         "total": { "type": "number" },
         "status": { "type": "string", "enum": ["Pending", "Shipped", "Delivered", "Cancelled"] },
-        "date": { "type": "string" }
+        "date": { "type": "string" },
+        "deliveryLocation": { "type": "string" },
+        "deliveryCharge": { "type": "number" }
       },
       "required": ["customerName", "customerPhone", "customerAddress", "total", "status", "date"]
     }

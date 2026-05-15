@@ -17,17 +17,25 @@ export function Cart() {
     customerName: '',
     customerPhone: '',
     customerAddress: '',
+    deliveryLocation: 'Inside Dhaka'
   });
+
+  const getDeliveryCharge = () => {
+    return checkoutData.deliveryLocation === 'Inside Dhaka' ? 70 : 130;
+  };
 
   const handleCheckout = (e: React.FormEvent) => {
     e.preventDefault();
     if (checkoutData.customerName && checkoutData.customerPhone) {
+      const charge = getDeliveryCharge();
       createOrder({
         customerName: checkoutData.customerName,
         customerPhone: checkoutData.customerPhone,
         customerAddress: checkoutData.customerAddress,
+        deliveryLocation: checkoutData.deliveryLocation,
+        deliveryCharge: charge,
         items: cart,
-        total: getCartTotal(),
+        total: getCartTotal() + charge,
       });
       setIsCheckoutOpen(false);
       navigate('/');
@@ -119,7 +127,7 @@ export function Cart() {
             </div>
             <div className="flex justify-between">
               <span>Shipping</span>
-              <span>Complimentary</span>
+              <span>Calculated at checkout</span>
             </div>
             <div className="flex justify-between">
               <span>Taxes</span>
@@ -175,9 +183,20 @@ export function Cart() {
                   <label className="text-[10px] uppercase tracking-[0.2em] text-[#C5A059] font-medium">Delivery Address</label>
                   <textarea required rows={3} value={checkoutData.customerAddress} onChange={e => setCheckoutData({...checkoutData, customerAddress: e.target.value})} className="w-full bg-white/5 border border-white/10 px-4 py-3 text-white outline-none focus:border-[#C5A059] transition-colors resize-none"></textarea>
                 </div>
+                <div className="space-y-2">
+                  <label className="text-[10px] uppercase tracking-[0.2em] text-[#C5A059] font-medium">Delivery Location</label>
+                  <select 
+                    value={checkoutData.deliveryLocation} 
+                    onChange={e => setCheckoutData({...checkoutData, deliveryLocation: e.target.value})}
+                    className="w-full bg-[#111] border border-white/10 px-4 py-3 text-white outline-none focus:border-[#C5A059] transition-colors"
+                  >
+                    <option value="Inside Dhaka">Inside Dhaka (৳70)</option>
+                    <option value="Outside Dhaka">Outside Dhaka (৳130)</option>
+                  </select>
+                </div>
                 
                 <button type="submit" className="w-full mt-6 py-4 bg-[#C5A059] hover:bg-[#D4B475] text-black transition-all duration-300 uppercase tracking-[0.2em] text-[11px] font-bold">
-                  Place Order • ৳{getCartTotal().toLocaleString()}
+                  Place Order • ৳{(getCartTotal() + getDeliveryCharge()).toLocaleString()}
                 </button>
               </form>
             </motion.div>
